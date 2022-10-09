@@ -25,13 +25,33 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: center;
     gap: 0.2rem;
-  }
 
+  }
+  
   .loading {
     margin: auto;
     margin-top: 10rem;
   }
+  
+  @media (max-width: 620px) {
+    .regions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
 `
+// export const RegionButtons = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   gap: 0.2rem;
+
+//   @media (max-width: 620px) {
+//     display: grid;
+//     grid-template-columns: 1fr 1fr 1fr 1fr;
+//     grid-auto-flow: row;
+//   }
+// `
 
 export const List = styled.div`
   display: grid;

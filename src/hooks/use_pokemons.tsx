@@ -56,7 +56,6 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
   const getPokemonGeneration = async (region: string, limit: number, offset: number) => {
     const cache = localStorage.getItem(region);
     const pokemonList = []
-    console.log('cache', cache)
 
     if (!cache) {
       const response = await pokeApi.listPokemon(limit, offset);

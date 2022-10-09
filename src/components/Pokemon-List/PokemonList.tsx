@@ -161,18 +161,18 @@ export const PokemonList = () => {
             />
           
           : <List> 
-            { pokemons.map(pokemon => {
-              const {id, name, types, stats} = pokemon;
-              return (
-                <Pokemon 
-                key={id} 
-                id={id} 
-                name={name} 
-                stats={stats} 
-                types={types}
-                />
-              )
-            })}
+              { pokemons.map(pokemon => {
+                const {id, name, types, stats} = pokemon;
+                return (
+                  <Pokemon 
+                  key={id} 
+                  id={id} 
+                  name={name} 
+                  stats={stats} 
+                  types={types}
+                  />
+                )
+              })}
             </List>
       } 
     </Container>
