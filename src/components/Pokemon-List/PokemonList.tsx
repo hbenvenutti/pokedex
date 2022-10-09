@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FaSearch } from 'react-icons/fa'
+import {css} from 'styled-components';
+import { FaSearch } from 'react-icons/fa';
+import ReactLoading from 'react-loading';
+
 import { usePokemons } from "../../hooks/use_pokemons";
 import { Pokemon } from '../Pokemon/Pokemon';
 import { Button, Container, FormContainer, List } from './styles';
@@ -8,6 +11,7 @@ export const PokemonList = () => {
   const { pokemons, search, updatePokemons } = usePokemons()
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false);
+
   const [kanto, setKanto] = useState(true);
   const [johto, setJohto] = useState(false);
   const [hoenn, setHoenn] = useState(false);
@@ -18,13 +22,13 @@ export const PokemonList = () => {
   const [galar, setGalar] = useState(false);
   const [hisui, setHisui] = useState(false);
 
-  // const [pokemons, setPokemons] = useState<any>([])
-  
   const handleSubmit = (event: any) => {
     event.preventDefault();
     
+    setLoading(true);
     search(searchValue);
     deactivateButtons();
+    setLoading(false);
     return
   }
 
@@ -47,40 +51,82 @@ export const PokemonList = () => {
   const handleKanto = async () => {
     deactivateButtons()
     setKanto(true);
+    setLoading(true);
     await updatePokemons('kanto');
+    setLoading(false);
   }
 
-  const handleJohto = () => {
+  const handleJohto = async () => {
     deactivateButtons()
     setJohto(true);
-    updatePokemons('johto');
+    setLoading(true);
+    await updatePokemons('johto');
+    setLoading(false);
   }
 
-  const handleHoenn = () => {
+  const handleHoenn = async () => {
     deactivateButtons()
     setHoenn(true);
-    updatePokemons('hoenn');
+    setLoading(true);
+    await updatePokemons('hoenn');
+    setLoading(false);
   }
 
   const handleSinnoh = async () => {
     deactivateButtons()
     setSinnoh(true);
+    setLoading(true);
     await updatePokemons('sinnoh');
+    setLoading(false);
   }
 
   const handleUnova = async () => {
     deactivateButtons()
-    setSinnoh(true);
+    setUnova(true);
     setLoading(true);
     await updatePokemons('unova');
     setLoading(false);
   }
 
-  // useEffect(() => {
-  //   // const { pokemons } = usePokemons();
-  //   // setPokemons(pokemons)
-  //   setLoading(false);
-  // }, [])
+  const handleKalos = async () => {
+    deactivateButtons()
+    setKalos(true);
+    setLoading(true);
+    await updatePokemons('kalos');
+    setLoading(false);
+  }
+
+  const handleAlola = async () => {
+    deactivateButtons()
+    setAlola(true);
+    setLoading(true);
+    await updatePokemons('alola');
+    setLoading(false);
+  }
+
+  const handleGalar = async () => {
+    deactivateButtons()
+    setGalar(true);
+    setLoading(true);
+    await updatePokemons('galar');
+    setLoading(false);
+  }
+
+  const handleHisui = async () => {
+    deactivateButtons()
+    setHisui(true);
+    setLoading(true);
+    await updatePokemons('hisui');
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    if (pokemons.length === 0 && !loading) {
+      setLoading(true)
+      return
+    }
+    setLoading(false);
+  }, [pokemons]);
   
   return (
     <Container>
@@ -97,30 +143,38 @@ export const PokemonList = () => {
         <Button onClick={handleHoenn} isActive={hoenn}>Hoenn</Button>
         <Button onClick={handleSinnoh} isActive={sinnoh}>Sinnoh</Button>
         <Button onClick={handleUnova} isActive={unova}>Unova</Button>
-        <Button isActive={kalos}>Kalos</Button>
-        <Button isActive={alola}>Alola</Button>
-        <Button isActive={galar}>Galar</Button>
-        <Button isActive={hisui}disabled={true}>Hisui</Button>
+        <Button onClick={handleKalos} isActive={kalos}>Kalos</Button>
+        <Button onClick={handleAlola} isActive={alola}>Alola</Button>
+        <Button onClick={handleGalar} isActive={galar}>Galar</Button>
+        <Button onClick={handleHisui} isActive={hisui} disabled={true}>Hisui</Button>
       </div>
 
-      <List>
-        {
+      {
           loading 
-          ? <h1>Carregando</h1> 
-          : pokemons.map(pokemon => {
-            const {id, name, types, stats} = pokemon;
-            return (
-              <Pokemon 
-              key={id} 
-              id={id} 
-              name={name} 
-              stats={stats} 
-              types={types}
-              />
+          ? <ReactLoading 
+              className='loading' 
+              type='spinningBubbles' 
+              color='#4592c4' 
+              width={100} 
+              height={100}
+              delay={0}  
+            />
+          
+          : <List> 
+            { pokemons.map(pokemon => {
+              const {id, name, types, stats} = pokemon;
+              return (
+                <Pokemon 
+                key={id} 
+                id={id} 
+                name={name} 
+                stats={stats} 
+                types={types}
+                />
               )
-            })
-          } 
-      </List>
+            })}
+            </List>
+      } 
     </Container>
   )
 }

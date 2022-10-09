@@ -26,6 +26,11 @@ export const Container = styled.div`
     justify-content: center;
     gap: 0.2rem;
   }
+
+  .loading {
+    margin: auto;
+    margin-top: 10rem;
+  }
 `
 
 export const List = styled.div`

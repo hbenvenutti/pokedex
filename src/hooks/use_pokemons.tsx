@@ -36,7 +36,11 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
     johto: {limit: 100, offset: 151},
     hoenn: {limit: 135, offset: 251},
     sinnoh: {limit: 107, offset: 386},
-    unova: {limit: 156, offset: 493}
+    unova: {limit: 156, offset: 493},
+    kalos: {limit: 72, offset: 649},
+    alola: {limit: 88, offset: 721},
+    galar: {limit: 97, offset: 809},
+    
   }
 
   // *** ------------------------------------------------------------------------------------ *** //
@@ -63,8 +67,8 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
         pokemonList.push({id, name, stats, types});
       }
 
-      localStorage.setItem(region, JSON.stringify(pokemonList));
       setPokemons(pokemonList);
+      localStorage.setItem(region, JSON.stringify(pokemonList));
       
       return;
     }
