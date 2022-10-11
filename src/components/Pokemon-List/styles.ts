@@ -12,6 +12,13 @@ export const Button = styled.button<CustomButtonProps>`
   width: 4rem;
   font-weight: 700;
   color: var(--white);
+  transition: background-color 0.2s;
+
+  ${props => props.isActive && css`cursor: default;`}
+  
+  &:hover {
+    background: ${props => !props.isActive && css`var(--flying-1)`};
+  }
 `
 
 export const Container = styled.div`
@@ -25,7 +32,6 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: center;
     gap: 0.2rem;
-
   }
   
   .loading {
@@ -40,18 +46,6 @@ export const Container = styled.div`
     }
   }
 `
-// export const RegionButtons = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   gap: 0.2rem;
-
-//   @media (max-width: 620px) {
-//     display: grid;
-//     grid-template-columns: 1fr 1fr 1fr 1fr;
-//     grid-auto-flow: row;
-//   }
-// `
 
 export const List = styled.div`
   display: grid;

@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   width: 15rem;
   padding: 1rem;
-  transition: padding 0.2s;
+  transition: padding 0.3s;
   
   &:hover {
     padding: 0;
@@ -36,7 +36,7 @@ export const Container = styled.div`
     justify-content: center;
     background: var(--gray-100);
     border-radius: 8px;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s;
   }
 
   .types {
@@ -70,17 +70,14 @@ export const Container = styled.div`
 
   .electric {
     background: var(--electric);
-    color: var(--gray-800);
   }
 
   .fairy {
     background: var(--fairy);
-    color: var(--gray-800);
   }
 
   .fighting {
     background: var(--fighting);
-    color: var(--gray-800);
   }
 
   .fire {
@@ -90,7 +87,6 @@ export const Container = styled.div`
   .flying {
     background: linear-gradient(180deg, var(--flying-1) 50%, var(--flying-2) 50%);
     background-color: var(--flying-1);
-    color: var(--gray-800);
   }
 
   .ghost {
@@ -99,13 +95,11 @@ export const Container = styled.div`
 
   .grass {
     background: var(--grass);
-    color: var(--gray-800);
   }
 
   .ground {
     background: linear-gradient(180deg, var(--ground-1) 50%, var(--ground-2) 50%);
     background-color: var(--ground-1);
-    color: var(--gray-800);
   }
 
   .ice {
