@@ -8,7 +8,7 @@ import { Pokemon } from '../Pokemon/Pokemon';
 import { Button, Container, FormContainer, List } from './styles';
 
 export const PokemonList = () => {
-  const { pokemons, search, updatePokemons } = usePokemons()
+  const { pokemons, search, getPokemons } = usePokemons()
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(false);
 
@@ -52,7 +52,7 @@ export const PokemonList = () => {
     deactivateButtons()
     setKanto(true);
     setLoading(true);
-    await updatePokemons('kanto');
+    await getPokemons('kanto');
     setLoading(false);
   }
 
@@ -60,7 +60,7 @@ export const PokemonList = () => {
     deactivateButtons()
     setJohto(true);
     setLoading(true);
-    await updatePokemons('johto');
+    await getPokemons('johto');
     setLoading(false);
   }
 
@@ -68,7 +68,7 @@ export const PokemonList = () => {
     deactivateButtons()
     setHoenn(true);
     setLoading(true);
-    await updatePokemons('hoenn');
+    await getPokemons('hoenn');
     setLoading(false);
   }
 
@@ -76,7 +76,7 @@ export const PokemonList = () => {
     deactivateButtons()
     setSinnoh(true);
     setLoading(true);
-    await updatePokemons('sinnoh');
+    await getPokemons('sinnoh');
     setLoading(false);
   }
 
@@ -84,7 +84,7 @@ export const PokemonList = () => {
     deactivateButtons()
     setUnova(true);
     setLoading(true);
-    await updatePokemons('unova');
+    await getPokemons('unova');
     setLoading(false);
   }
 
@@ -92,7 +92,7 @@ export const PokemonList = () => {
     deactivateButtons()
     setKalos(true);
     setLoading(true);
-    await updatePokemons('kalos');
+    await getPokemons('kalos');
     setLoading(false);
   }
 
@@ -100,7 +100,7 @@ export const PokemonList = () => {
     deactivateButtons()
     setAlola(true);
     setLoading(true);
-    await updatePokemons('alola');
+    await getPokemons('alola');
     setLoading(false);
   }
 
@@ -108,7 +108,7 @@ export const PokemonList = () => {
     deactivateButtons()
     setGalar(true);
     setLoading(true);
-    await updatePokemons('galar');
+    await getPokemons('galar');
     setLoading(false);
   }
 
@@ -116,7 +116,7 @@ export const PokemonList = () => {
     deactivateButtons()
     setHisui(true);
     setLoading(true);
-    await updatePokemons('hisui');
+    await getPokemons('hisui');
     setLoading(false);
   }
 
@@ -162,13 +162,13 @@ export const PokemonList = () => {
           
           : <List> 
               { pokemons.map(pokemon => {
-                const {id, name, types, stats} = pokemon;
+                const {id, dexNumber, name, types, art} = pokemon;
                 return (
                   <Pokemon 
-                  key={id} 
-                  id={id} 
+                  key={id}
+                  dexNumber={dexNumber}
                   name={name} 
-                  stats={stats} 
+                  art={art}
                   types={types}
                   />
                 )

@@ -1,10 +1,10 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { PokeApi, Stat, PokeType, Variety } from "../providers/api/pokeapi";
+import { PokeApi, Pokemon } from "../providers/api/pokeapi";
 import { getIdFromURL } from "../utils/get_id_from_url";
 
 interface PokemonsContextData {
-  pokemons: PokemonList;
-  updatePokemons: (region: string) => Promise<void>;
+  pokemons: Pokemon[];
+  getPokemons: (region: string) => Promise<void>;
   search: (value: string) => Promise<void>;
 }
 
@@ -12,71 +12,62 @@ interface PokemonsProps {
   children: ReactNode;
 }
 
-export interface Pokemon {
-  id: number;
-  stats: Stat[];
-  types: string[];
-  varieties?: Variety[];
-  name: string;
-  url?: string;
-}
-
-export type PokemonList = Pokemon[];
-
 const PokemonsContext = createContext<PokemonsContextData>({} as PokemonsContextData);
 
 export const PokemonsProvider = ({children}: PokemonsProps) => {
-  const [pokemons, setPokemons] = useState<PokemonList>([]);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [kanto, setKanto] = useState<Pokemon[]>([]);
+  const [johto, setJohto] = useState<Pokemon[]>([]);
+  const [hoenn, setHoenn] = useState<Pokemon[]>([]);
+  const [sinnoh, setSinnoh] = useState<Pokemon[]>([]);
+  const [unova, setUnova] = useState<Pokemon[]>([]);
+  const [kalos, setKalos] = useState<Pokemon[]>([]);
+  const [alola, setAlola] = useState<Pokemon[]>([]);
+  const [galar, setGalar] = useState<Pokemon[]>([]);
   const pokeApi = PokeApi.getInstance();
 
   // *** ------------------------------------------------------------------------------------ *** //
 
-  const regions = {
-    kanto: {limit: 151, offset: 0},
-    johto: {limit: 100, offset: 151},
-    hoenn: {limit: 135, offset: 251},
-    sinnoh: {limit: 107, offset: 386},
-    unova: {limit: 156, offset: 493},
-    kalos: {limit: 72, offset: 649},
-    alola: {limit: 88, offset: 721},
-    galar: {limit: 97, offset: 809},
+  const regionCache = {
+    kanto,
+    johto,
+    hoenn,
+    sinnoh,
+    unova,
+    kalos,
+    alola,
+    galar
+  }
+
+  const setRegion = {
+    kanto: setKanto,
+    johto: setJohto,
+    hoenn: setHoenn,
+    sinnoh: setSinnoh,
+    unova: setUnova,
+    kalos: setKalos,
+    alola: setAlola,
+    galar: setGalar
+  }
+
+  const getPokemons = async (region: string): Promise<void> => {
+    const cache = regionCache[region as keyof typeof regionCache];
     
-  }
+    if (cache.length === 0) {
+      const pokemons = await pokeApi.listByRegion(region);
+      setPokemons(pokemons);
 
-  // *** ------------------------------------------------------------------------------------ *** //
+      setRegion[region as keyof typeof setRegion](pokemons);
 
-  const getGenData = (region: string) => {
-    const { limit, offset } = regions[region as keyof typeof regions];
-
-    return {limit, offset};
-  }
-
-  // *** ------------------------------------------------------------------------------------ *** //
-
-  const getPokemonGeneration = async (region: string, limit: number, offset: number) => {
-    const cache = localStorage.getItem(region);
-    const pokemonList = []
-
-    if (!cache) {
-      const response = await pokeApi.listPokemon(limit, offset);
-
-      for (let i=0; i < response.length; i++) {
-        const id = getIdFromURL(response[i].url);
-        const {stats, types, name} = await pokeApi.getPokemonInfo(id);
-        pokemonList.push({id, name, stats, types});
-      }
-
-      setPokemons(pokemonList);
-      localStorage.setItem(region, JSON.stringify(pokemonList));
       
       return;
     }
 
-    setPokemons(JSON.parse(cache));
+    setPokemons(cache);
   }
 
   useEffect(() => {
-    updatePokemons('kanto');
+    getPokemons('kanto');
   }, []);
   
   // *** ------------------------------------------------------------------------------------ *** //
@@ -84,24 +75,20 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
   const search = async (value: string) => {
     if (value) {
       const pokemon = await pokeApi.searchPokemon(value);
-      setPokemons([pokemon]);
+      
+      setPokemons(pokemon);
 
       return
     }
 
-    updatePokemons('kanto');
+    getPokemons('kanto');
   }
 
-  const updatePokemons = async (region: string) => {
-    const {limit, offset} = getGenData(region);
-    await getPokemonGeneration(region, limit, offset);
-  }
-  
   // *** ------------------------------------------------------------------------------------ *** //
 
   return (
     <PokemonsContext.Provider 
-      value={{pokemons, search, updatePokemons}}>
+      value={{pokemons, search, getPokemons}}>
         {children}
     </PokemonsContext.Provider>
   );
