@@ -29,7 +29,7 @@ class PokeApi {
   }
 
   private api = axios.create({
-    baseURL: import.meta.env.VITE_REACT_APP_API_URL
+    baseURL: import.meta.env.VITE_REACT_APP_API_URL as string
   });
 
 
