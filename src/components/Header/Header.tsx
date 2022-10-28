@@ -1,16 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import pokeball from '../../assets/pokeball-white.svg'
 import { Pokeball } from '../Pokeball/Pokeball';
 import { Container } from './styles';
 
 export const Header = () => {
   return (
     <Container>
-      <div className='title'>
-        <Pokeball fill='#fff'/>
-        <h1>Pokedex</h1>
-      </div>
+      <Link to="/">
+        <div className='title'>
+          <Pokeball fill='#fff'/>
+          <h1>Pokedex</h1>
+        </div>
+      </Link>
     </Container>
   );
 }

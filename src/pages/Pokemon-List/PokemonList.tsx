@@ -4,8 +4,8 @@ import { FaSearch } from 'react-icons/fa';
 import ReactLoading from 'react-loading';
 
 import { usePokemons } from "../../hooks/use_pokemons";
-import { Pokemon } from '../Pokemon/Pokemon';
 import { Button, Container, FormContainer, List } from './styles';
+import { Pokemon } from '../../components/Pokemon/Pokemon';
 
 export const PokemonList = () => {
   const { pokemons, search, getPokemons } = usePokemons()

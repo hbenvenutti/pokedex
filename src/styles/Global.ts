@@ -67,7 +67,12 @@ export const GlobalStyle = createGlobalStyle`
   button, a{
     cursor: pointer;
   }
-
+  
+  a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+  }
+  
   [disabled] {
     opacity: 0.6;
     cursor: not-allowed;
@@ -78,4 +83,5 @@ export const GlobalStyle = createGlobalStyle`
     outline: transparent;
     box-shadow: 0 0 0 2px var(--gray-800);
   }
+
 `
