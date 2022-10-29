@@ -5,7 +5,7 @@ export const NotFound = () => {
     <Component>
       <h1>Page Not Found!</h1>
       <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/404.png" alt="luxio" />
-      <span>404</span>
+      <span>N° 404</span>
     </ Component>
   )
 }
