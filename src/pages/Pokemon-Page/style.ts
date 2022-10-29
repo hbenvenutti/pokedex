@@ -6,6 +6,7 @@ export const Page = styled.div`
   margin: 0 auto;
   align-items: center;
   width: 60rem;
+  gap: 5rem;
 
   @media(max-width: 970px) {
     width: 90%;
@@ -26,8 +27,8 @@ export const Page = styled.div`
   .name {
     display: flex;
     flex-direction: row;
-
     gap: 2rem;
+
     span {
       color: var(--gray-500);
       font-weight: 600;
@@ -50,7 +51,7 @@ export const Page = styled.div`
     gap: 2rem;
     display: flex;
     flex-direction: row;
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
 
     @media(max-width: 970px) {
       flex-direction: column;

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import {useParams} from 'react-router-dom';
+import { PokemonChart } from "../../components/Pokemon-Chart/PokemonChart";
 
 import { usePokemons } from "../../hooks/use_pokemons";
 import { capitalize, capitalizeName } from "../../utils/capitalize";
@@ -70,6 +71,14 @@ export const PokemonPage = () => {
 
                 </div>
               </div>
+              <PokemonChart 
+                hp={pokemon.hp}
+                attack={pokemon.attack}
+                specialAttack={pokemon.specialAttack}
+                defense={pokemon.defense}
+                specialDefense={pokemon.specialDefense}
+                speed={pokemon.speed}
+              />
             </Page>
           
           : <NotFound />
