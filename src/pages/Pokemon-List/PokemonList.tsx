@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {css} from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 import ReactLoading from 'react-loading';
 
 import { usePokemons } from "../../hooks/use_pokemons";
-import { Pokemon } from '../Pokemon/Pokemon';
 import { Button, Container, FormContainer, List } from './styles';
+import { Pokemon } from '../../components/Pokemon/Pokemon';
 
 export const PokemonList = () => {
   const { pokemons, search, getPokemons } = usePokemons()
@@ -127,6 +126,8 @@ export const PokemonList = () => {
     }
     setLoading(false);
   }, [pokemons]);
+
+  useEffect(() => { handleKanto()}, [])
   
   return (
     <Container>
@@ -162,7 +163,7 @@ export const PokemonList = () => {
           
           : <List> 
               { pokemons.map(pokemon => {
-                const {id, dexNumber, name, types, art} = pokemon;
+                const {id, dexNumber, name, types, art, formId} = pokemon;
                 return (
                   <Pokemon 
                   key={id}
@@ -170,6 +171,7 @@ export const PokemonList = () => {
                   name={name} 
                   art={art}
                   types={types}
+                  formId={formId}
                   />
                 )
               })}

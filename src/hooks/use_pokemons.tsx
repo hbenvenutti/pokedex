@@ -4,8 +4,10 @@ import { getIdFromURL } from "../utils/get_id_from_url";
 
 interface PokemonsContextData {
   pokemons: Pokemon[];
+  pokemon: Pokemon;
   getPokemons: (region: string) => Promise<void>;
   search: (value: string) => Promise<void>;
+  getOnePokemon: (id: string) => Promise<Pokemon>;
 }
 
 interface PokemonsProps {
@@ -16,6 +18,7 @@ const PokemonsContext = createContext<PokemonsContextData>({} as PokemonsContext
 
 export const PokemonsProvider = ({children}: PokemonsProps) => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [pokemon, setPokemon] = useState<Pokemon>({} as Pokemon);
   const [kanto, setKanto] = useState<Pokemon[]>([]);
   const [johto, setJohto] = useState<Pokemon[]>([]);
   const [hoenn, setHoenn] = useState<Pokemon[]>([]);
@@ -66,6 +69,14 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
     setPokemons(cache);
   }
 
+  const getOnePokemon = async (id: string): Promise<Pokemon> => {
+    const pokemon = await pokeApi.getOnePokemon(id) as Pokemon;
+    
+    setPokemon(pokemon);
+
+    return pokemon;
+  }
+
   useEffect(() => {
     getPokemons('kanto');
   }, []);
@@ -88,7 +99,7 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
 
   return (
     <PokemonsContext.Provider 
-      value={{pokemons, search, getPokemons}}>
+      value={{pokemon, pokemons, search, getPokemons, getOnePokemon}}>
         {children}
     </PokemonsContext.Provider>
   );
