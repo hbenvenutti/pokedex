@@ -8,6 +8,7 @@ import { Content } from './styles/App.styles';
 
 import { GlobalStyle } from './styles/Global';
 import { NotFound } from './pages/Not-Found/NotFound';
+import { PokemonPage } from './pages/Pokemon-Page/PokemonPage';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
             <main>
               <Routes>
                 <Route path="/" element={<PokemonList />} />
+                <Route path="/pokemons/:id" element={<PokemonPage/>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>

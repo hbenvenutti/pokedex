@@ -3,7 +3,9 @@ import axios from 'axios';
 export interface Pokemon {
   id: string;
   formId: string;
+  abilities: string[];
   name: string;
+  entry: string;
   dexNumber: number;
   types: string[];
   art: string;
@@ -39,12 +41,16 @@ class PokeApi {
     return data as Pokemon[];
   }
 
-
-
   searchPokemon = async(value: string): Promise<Pokemon[]> => {
     const { data } = await this.api.get(`/pokemons/?search=${value}`);
 
     return data as Pokemon[]; 
+  }
+
+  getOnePokemon = async(id: string): Promise<Pokemon | undefined> => {
+    const {data} = await this.api.get(`/pokemons/${id}`);
+
+    return data as Pokemon
   }
 }
 

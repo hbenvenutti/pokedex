@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 import { capitalize, capitalizeName } from '../../utils/capitalize';
 import { Container } from "./styles";
@@ -6,6 +7,7 @@ import { Container } from "./styles";
 
 interface PokemonProps {
   id?: string;
+  formId: string;
   dexNumber: number;
   name: string;
   types: string[];
@@ -15,13 +17,16 @@ interface PokemonProps {
 export const Pokemon = (props: PokemonProps) => {
   return (
     <Container>
-      <a className="link">
+      <Link to={`/pokemons/${props.formId}`} className="link">
         <img src={props.art} alt={props.name} />
-      </a>
+      </Link>
       <span>N° {
           props.dexNumber < 10 
-            ? `00${props.dexNumber}` 
-            : props.dexNumber < 100 ? `0${props.dexNumber}` : props.dexNumber
+            ? '00' 
+            : props.dexNumber < 100 && '0'
+        }
+        {
+          props.dexNumber
         }
       </span>
       <strong>{capitalizeName(props.name)}</strong>
