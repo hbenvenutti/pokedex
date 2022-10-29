@@ -1,7 +1,9 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 
+import { chartOptions } from './chartOptions';
 import { calculateHp, calculateMaxHp, calculateMaxStat, calculateStat } from '../../utils/calculateStats';
+import { getSeries } from './chartSeries';
 
 interface PokemonChartProps {
   hp: number;
@@ -34,94 +36,33 @@ export const PokemonChart = (props: PokemonChartProps) => {
 
   
 
-  const options = {
-    chart: {
-      stacked: false,
-      toolbar: {
-        show: false
-      }
-    },
-    responsive: [
-      {
-        breakpoint: 800,
-        options: {
-          chart: {
-            width: 600,
-            height: 375
-          }
-        }
-      },
-      {
-        breakpoint: 605,
-        options: {
-          chart: {
-            width: 450,
-          }
-        }
-      },
-      {
-        breakpoint: 460,
-        options: {
-          chart: {
-            width: 350,
-          }
-        }
-      },
-    ],
-    plotOptions: {
-      bar: {
-        borderRadius: 8
-      }
-    },
-    yaxis: {
-      max: 450
-    },
-    xaxis: {
-      categories: ['HP', 'Attack', 'Special Attack', 'Defense', 'Special Defense', 'Speed']
+  const series = getSeries({
+      baseHp: props.hp,
+      baseAttack: props.attack,
+      baseDefense: props.defense,
+      baseSpecialAttack: props.specialAttack,
+      baseSpecialDefense: props.specialDefense,
+      baseSpeed: props.speed,
+      hpLv100,
+      attackLv100,
+      defenseLv100,
+      specialAttackLv100,
+      specialDefenseLv100,
+      speedLv100,
+      maxHp,
+      maxAttack,
+      maxDefense,
+      maxSpecialAttack,
+      maxSpecialDefense,
+      maxSpeed
     }
-  }
-
-  const series = [
-    {
-      name: 'Base',
-      data: [
-          {x: 'hp', y: props.hp}, 
-          {x: 'attack', y: props.attack}, 
-          {x: 'special attack', y: props.specialAttack}, 
-          {x: 'defense', y: props.defense}, 
-          {x: 'special defense', y: props.specialDefense}, 
-          {x: 'speed', y: props.speed}
-        ],
-    },
-    {
-      name: 'At Level 100',
-      data: [
-        {x: 'hp', y: hpLv100}, 
-        {x: 'attack', y: attackLv100}, 
-        {x: 'special attack', y: specialAttackLv100}, 
-        {x: 'defense', y: defenseLv100}, 
-        {x: 'special defense', y: specialDefenseLv100}, 
-        {x: 'speed', y: speedLv100}
-      ]
-    },
-    {
-      name: 'Max',
-      data: [
-        {x: 'hp', y: maxHp}, 
-        {x: 'attack', y: maxAttack}, 
-        {x: 'special attack', y: maxSpecialAttack}, 
-        {x: 'defense', y: maxDefense}, 
-        {x: 'special defense', y: maxSpecialDefense}, 
-        {x: 'speed', y: maxSpeed}
-      ]
-    }
-  ];
+  )
 
   return (
     <>
       <Chart 
         type='bar' 
-        options={options} 
+        options={chartOptions} 
         series={series}
         width={800}
         height={500}
