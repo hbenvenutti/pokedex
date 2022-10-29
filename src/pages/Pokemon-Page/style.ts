@@ -5,7 +5,23 @@ export const Page = styled.div`
   flex-direction: column;
   margin: 0 auto;
   align-items: center;
-  width: 55rem;
+  width: 60rem;
+
+  @media(max-width: 970px) {
+    width: 90%;
+  }
+
+  /* @media(max-width: 700px) {
+    width: 30rem;
+  }
+
+  @media(max-width: 540px) {
+    width: 20rem;
+  }
+
+  @media(max-width: 400px) {
+    width: 10rem;
+  } */
 
   .name {
     display: flex;
@@ -22,8 +38,12 @@ export const Page = styled.div`
   img {
     background-color: var(--gray-100);
     border-radius: 8px;
-    width: 1.5fr;
-    /* height: 25rem; */
+    height: 30rem;
+
+    @media (max-width: 970px) {
+      width: 100%;
+      height: auto;
+    }
   }
 
   .profile {
@@ -31,6 +51,20 @@ export const Page = styled.div`
     display: flex;
     flex-direction: row;
     margin-top: 5rem;
+
+    @media(max-width: 970px) {
+      flex-direction: column;
+    }
+  }
+  .rightColumn {
+    height: 30rem;
+
+    p {
+      height: 10%;
+      text-align: justify;
+    }
+
+
   }
 
   .attributes {
@@ -41,7 +75,7 @@ export const Page = styled.div`
     background: var(--water);
     border-radius: 8px;
 
-    height: 20rem;
+    height: 60%;
     padding: 1.5rem;
 
     strong {
@@ -61,6 +95,8 @@ export const Page = styled.div`
     flex-direction: column;
     margin-top: 2rem;
     gap: 1rem;
+
+    height: 30%;
 
     strong {
       font-size: 1.5rem;

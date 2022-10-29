@@ -36,7 +36,7 @@ export const PokemonPage = () => {
               <div className="profile">
                 <img src={pokemon.art} alt={pokemon.name} />
                 
-                <div>
+                <div className="rightColumn">
                   <p>{pokemon.entry}</p>
 
                   <div className="attributes">
