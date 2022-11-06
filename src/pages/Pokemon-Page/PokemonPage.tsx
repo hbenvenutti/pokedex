@@ -55,7 +55,7 @@ export const PokemonPage = () => {
                     <div className="attribute">
                       <strong>Abilities</strong>
                       {pokemon.abilities.map(ability => {
-                          return <span>{capitalize(ability)}</span>
+                          return <span key={ability}>{capitalize(ability)}</span>
                         })}
                     </div>
                   </div>
@@ -64,7 +64,7 @@ export const PokemonPage = () => {
                       <strong>Types</strong>
                       <div className="types">
                         {pokemon.types.map(type => {
-                          return <span className={type}>{capitalize(type)}</span>
+                          return <span key={type} className={type}>{capitalize(type)}</span>
                         })}
                       </div>
                     </div>

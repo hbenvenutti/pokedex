@@ -58,14 +58,16 @@ export const Page = styled.div`
     }
   }
   .rightColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    
     height: 30rem;
 
     p {
-      height: 10%;
       text-align: justify;
     }
-
-
   }
 
   .attributes {
@@ -73,10 +75,11 @@ export const Page = styled.div`
     flex-direction: column;
     margin-top: 2rem;
     gap: 1rem;
+
     background: var(--water);
     border-radius: 8px;
 
-    height: 60%;
+    width: 100%;
     padding: 1.5rem;
 
     strong {
@@ -88,16 +91,17 @@ export const Page = styled.div`
   .attribute {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.2rem;
   }
 
   .typesContainer {
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
-    gap: 1rem;
+    gap: 0.5rem;
 
-    height: 30%;
+    width: 100%;
+    /* height: 30%; */
 
     strong {
       font-size: 1.5rem;
@@ -108,11 +112,13 @@ export const Page = styled.div`
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    
+    width: 100%;
 
     span {
       border-radius: 5px;
       line-height: 2rem;
-      width: 25%;
+      width: 7rem;
       justify-content: center;
       text-align: center;
       color: var(--white);
