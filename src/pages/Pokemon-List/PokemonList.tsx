@@ -5,7 +5,8 @@ import ReactLoading from 'react-loading';
 import { usePokemons } from "../../hooks/use_pokemons";
 import { Button, Container, FormContainer, List } from './styles';
 import { Pokemon } from '../../components/Pokemon/Pokemon';
-import { nameStartsWithValue } from '../../utils/nameStartswithSearchValue';
+import { nameStartsWithValue } from '../../utils/nameStartsWithSearchValue';
+import { pokemonNameList } from '../../utils/pokemonNameList';
 
 export const PokemonList = () => {
   const { pokemons, search, getPokemons } = usePokemons()
@@ -140,9 +141,9 @@ export const PokemonList = () => {
 
         <datalist id='pokemon-list'>
           {
-            searchValue && pokemons.map(pokemon => 
-                nameStartsWithValue(searchValue, pokemon.name) 
-                && <option key={pokemon.name} value={pokemon.name}/>)
+            searchValue && pokemonNameList.map(pokemon => 
+                nameStartsWithValue(searchValue, pokemon) 
+                && <option key={pokemon} value={pokemon}/>)
           }
         </datalist>
       </FormContainer>
