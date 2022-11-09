@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {useParams} from 'react-router-dom';
 import { PokemonChart } from "../../components/Pokemon-Chart/PokemonChart";
+import { VariationSelector } from "../../components/Variation-Selector";
 
 import { usePokemons } from "../../hooks/use_pokemons";
 import { capitalize, capitalizeName } from "../../utils/capitalize";
 import { NotFound } from "../Not-Found/NotFound";
 import { Page } from "./style";
 
-interface Stats {
+export interface Stats {
   hp: number;
   attack: number;
   specialAttack: number;
@@ -21,6 +22,7 @@ export const PokemonPage = () => {
   const { getOnePokemon, pokemon, variations, evolutionLine } = usePokemons();
   
   const [name, setName] = useState("");
+  const [abilities, setAbilities] = useState<string[]>([])
   const [art, setArt] = useState("");
   const [entry, setEntry] = useState("");
   const [types, setTypes] = useState<string[]>([]);
@@ -50,7 +52,8 @@ export const PokemonPage = () => {
         specialDefense, 
         speed,
         height,
-        weight
+        weight,
+        abilities
       } = pokemon;
 
       setName(name);
@@ -60,6 +63,7 @@ export const PokemonPage = () => {
       setStats({hp, attack, specialAttack, defense, specialDefense, speed})
       setHeight(height)
       setWeight(weight)
+      setAbilities(abilities)
     }
   }, [pokemon])
 
@@ -81,7 +85,22 @@ export const PokemonPage = () => {
               </div>
 
               <div className="profile">
-                <img title={name} src={art} alt="pokemon art" />
+                <div className="art-container">
+                  <img title={name} src={art} alt="pokemon art" />
+
+                  {variations.length !== 0 &&
+                    <VariationSelector 
+                      setName={setName}
+                      setArt={setArt}
+                      setEntry={setEntry}
+                      setTypes={setTypes}
+                      setHeight={setHeight}
+                      setWeight={setWeight}
+                      setStats={setStats}
+                      setAbilities={setAbilities}
+                    />
+                  }
+                </div>
                 
                 <div className="rightColumn">
                   <p>{entry}</p>
@@ -89,19 +108,19 @@ export const PokemonPage = () => {
                   <div className="attributes">
                     <div className="attributes-column">
                       <div className="attribute">
-                        <strong>Height</strong>
+                        <strong>Altura</strong>
                         <span>{height}</span>
                       </div>
 
                       <div className="attribute">
-                        <strong>Weight</strong>
+                        <strong>Peso</strong>
                         <span>{weight}</span>
                       </div>
 
 
                       <div className="attribute">
-                        <strong>Abilities</strong>
-                        {pokemon.abilities.map(ability => {
+                        <strong>Habilidades</strong>
+                        {abilities.map(ability => {
                           return <span key={ability}>{capitalize(ability)}</span>
                         })}
                       </div>

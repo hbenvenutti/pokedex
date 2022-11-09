@@ -57,6 +57,15 @@ export const Page = styled.div`
       flex-direction: column;
     }
   }
+
+  .art-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
   .rightColumn {
     display: flex;
     flex-direction: column;

@@ -30,6 +30,7 @@ export interface Pokemon {
 
 export interface Variation {
   id: string;
+  abilities: string[];
   dexNumber: number;
   name: string;
   types: string[];
