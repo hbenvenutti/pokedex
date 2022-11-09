@@ -27,7 +27,19 @@ const johto: string[] = []
 const hoenn: string[] = []
 const sinnoh: string[] = []
 const unova: string[] = []
-const kalos: string[] = []
+
+const kalos: string[] = [
+  'chespin', 'quilladin', 'chesnaught', 'fennekin', 'braixen', 'delphox', 'froakie', 'frogadier', 'greninja',
+  'bunnelby', 'diggerby', 'fletchling', 'fletchinder', 'talonflame', 'scatterbug', 'spewpa', 'vivillon',
+  'litleo', 'pyroar', 'flabébé', 'floette', 'florges', 'skiddo', 'gogoat', 'pancham', 'pangoro',
+  'furfrou', 'espurr', 'meowstic', 'honedge', 'doublade', 'aegislash', 'spritzee', 'aromatisse', 
+  'swirlix', 'slurpuff', 'inkay', 'malamar', 'binacle', 'barbaracle', 'skrelp', 'dragalge', 
+  'clauncher', 'clawitzer', 'helioptile', 'heliolisk', 'tyrunt', 'tyruntrum','amaura', 'aurorus',
+  'sylveon', 'hawlucha', 'dedenne', 'carbink', 'goomy', 'sliggoo', 'goodra', 'klefki',
+  'phantump', 'trevenant', 'pumpkaboo', 'gourgeist', 'bergmite', 'avalugg', 'noibat', 'noivern',
+  'xerneas', 'yveltal', 'zygarde', 'diancie', 'hoopa', 'volcanion'
+];
+
 const alola: string[] = []
 const galar: string[] = []
 
