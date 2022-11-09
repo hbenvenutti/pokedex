@@ -82,7 +82,13 @@ export const PokemonList = () => {
   return (
     <Container>
       <FormContainer onSubmit={handleSubmit}>
-        <input list='pokemon-list' type='search' onChange={handleSearch}/>
+        <input 
+          placeholder='busque por nome ou número'
+          list='pokemon-list' 
+          type='search' 
+          onChange={handleSearch}
+        />
+
         <button type='submit'>
           <FaSearch className='searchIcon'/>
         </button>

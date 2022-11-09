@@ -12,12 +12,16 @@ export const Button = styled.button<CustomButtonProps>`
   width: 4rem;
   font-weight: 700;
   color: var(--white);
-  transition: background-color 0.2s;
+  transition: background-color 0.1s;
 
   ${props => props.isActive && css`cursor: default;`}
   
   &:hover {
     background: ${props => !props.isActive && css`var(--flying-1)`};
+  }
+
+  &:focus {
+    box-shadow: none;
   }
 `
 
@@ -85,16 +89,31 @@ export const FormContainer = styled.form`
     height: 2.1rem;
     padding: 0.1rem;
 
+    transition: color 0.05s;
+
+
     svg {
       height: 2rem;
       width: 2rem;
+    }
+
+    &:focus {
+      box-shadow: none;
+      color: var(--dragon-2);
     }
   }
 
   input {
     box-sizing: content-box;
-    border: solid var(--gray-800) 2px;
-    border-radius: 8px;
+    border: 0;
+    border-bottom: solid var(--gray-800) 2px;
     height: 2rem;
+
+    transition: border-color 0.15s;
+
+    &:focus {
+      box-shadow: none;
+      border-color: var(--dragon-2);
+    }
   }
 `

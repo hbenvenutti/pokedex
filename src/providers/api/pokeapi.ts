@@ -25,7 +25,7 @@ class PokeApi {
   public static getInstance(): PokeApi {
     if (!PokeApi.INSTANCE) {
       PokeApi.INSTANCE = new PokeApi();
-      console.log('api: ', import.meta.env.VITE_REACT_APP_API_URL as string)
+      // console.log('api: ', import.meta.env.VITE_REACT_APP_API_URL as string)
     }
     
     return PokeApi.INSTANCE;
