@@ -79,6 +79,7 @@ export const FormContainer = styled.form`
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  width: 17rem;
 
   button {
     border: 0;
@@ -91,10 +92,9 @@ export const FormContainer = styled.form`
 
     transition: color 0.05s;
 
-
     svg {
-      height: 2rem;
-      width: 2rem;
+      height: 1.5rem;
+      width: 1.5rem;
     }
 
     &:focus {
@@ -105,6 +105,7 @@ export const FormContainer = styled.form`
 
   input {
     box-sizing: content-box;
+    flex: 1;
     border: 0;
     border-bottom: solid var(--gray-800) 2px;
     height: 2rem;
