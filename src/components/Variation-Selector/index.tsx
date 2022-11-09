@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import { usePokemons } from "../../hooks/use_pokemons"
 import { Stats } from "../../pages/Pokemon-Page/PokemonPage";
 import { Pokemon, Variation } from "../../providers/api/pokeapi"
@@ -20,7 +21,8 @@ export const VariationSelector = (
   
     const {pokemon, variations} = usePokemons()
 
-  const handleSelection = (variation: Pokemon | Variation) => {
+
+  const setProperties = (variation: Pokemon | Variation) => {
     const {abilities, hp, attack, defense, specialAttack, specialDefense, speed} = variation;
 
     setName(variation.name);
@@ -31,22 +33,28 @@ export const VariationSelector = (
     setWeight(variation.weight);
     setStats({hp, attack, defense, specialAttack, specialDefense, speed});
     setAbilities(abilities);
+  }
 
+  const handleSelection = (event: ChangeEvent<HTMLSelectElement>) => {
+    const {value} = event.target;
+    
+    const variation = variations.find(variation => variation.name === value);
+    
+    variation ? setProperties(variation) : setProperties(pokemon);
   }
 
   return (
-    <SelectorContainer>
-      <option  
-        onClick={() => handleSelection(pokemon)} 
-        value=""
+    <SelectorContainer onChange={handleSelection}>
+      <option 
+        value={pokemon.name}
       >
         {pokemon.name.toUpperCase()}
       </option>
       {
         variations.map(variation => 
           <option 
+            value={variation.name}
             key={variation.name}
-            onClick={() => handleSelection(variation)}
           >
             {variation.name.toUpperCase()}
           </option>)

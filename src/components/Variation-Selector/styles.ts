@@ -9,8 +9,11 @@ export const SelectorContainer = styled.select`
   border-radius: 0 0 10px 10px;
   height: 2rem;
 
+  &:focus {
+    box-shadow: none;
+  }
 
   option {
-    background: var(--gray-500);
+    background-color: var(--gray-800);
   }
 `
