@@ -4,6 +4,7 @@ import Chart from 'react-apexcharts';
 import { chartOptions } from './chartOptions';
 import { calculateHp, calculateMaxHp, calculateMaxStat, calculateStat } from '../../utils/calculateStats';
 import { getSeries } from './chartSeries';
+import { ChartContainer } from './styles';
 
 interface PokemonChartProps {
   hp: number;
@@ -59,14 +60,14 @@ export const PokemonChart = (props: PokemonChartProps) => {
   )
 
   return (
-    <>
+    <ChartContainer>
       <Chart 
         type='bar' 
         options={chartOptions} 
         series={series}
-        width={800}
-        height={500}
+        // width={800}
+        // height={500}
       />
-    </>
+    </ChartContainer>
   )
 }
