@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import ReactLoading from 'react-loading';
 
@@ -23,7 +23,7 @@ export const PokemonList = () => {
   const [galar, setGalar] = useState(false);
   const [hisui, setHisui] = useState(false);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     
     setLoading(true);
@@ -45,79 +45,27 @@ export const PokemonList = () => {
     setHisui(false);
   }
 
-  const handleSearch = (value: string) => {
-    setSearchValue(value);
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
   }
 
-  const handleKanto = async () => {
-    deactivateButtons()
-    setKanto(true);
-    setLoading(true);
-    await getPokemons('kanto');
-    setLoading(false);
+  const setRegion = {
+    'kanto': setKanto,
+    'johto': setJohto,
+    'hoenn': setHoenn,
+    'sinnoh': setSinnoh,
+    'unova': setUnova,
+    'kalos': setKalos,
+    'alola': setAlola,
+    'galar': setGalar,
+    'hisui': setHisui 
   }
 
-  const handleJohto = async () => {
-    deactivateButtons()
-    setJohto(true);
+  const handleRegion = async (region: string) => {
+    deactivateButtons();
+    setRegion[region as keyof typeof setRegion](true);
     setLoading(true);
-    await getPokemons('johto');
-    setLoading(false);
-  }
-
-  const handleHoenn = async () => {
-    deactivateButtons()
-    setHoenn(true);
-    setLoading(true);
-    await getPokemons('hoenn');
-    setLoading(false);
-  }
-
-  const handleSinnoh = async () => {
-    deactivateButtons()
-    setSinnoh(true);
-    setLoading(true);
-    await getPokemons('sinnoh');
-    setLoading(false);
-  }
-
-  const handleUnova = async () => {
-    deactivateButtons()
-    setUnova(true);
-    setLoading(true);
-    await getPokemons('unova');
-    setLoading(false);
-  }
-
-  const handleKalos = async () => {
-    deactivateButtons()
-    setKalos(true);
-    setLoading(true);
-    await getPokemons('kalos');
-    setLoading(false);
-  }
-
-  const handleAlola = async () => {
-    deactivateButtons()
-    setAlola(true);
-    setLoading(true);
-    await getPokemons('alola');
-    setLoading(false);
-  }
-
-  const handleGalar = async () => {
-    deactivateButtons()
-    setGalar(true);
-    setLoading(true);
-    await getPokemons('galar');
-    setLoading(false);
-  }
-
-  const handleHisui = async () => {
-    deactivateButtons()
-    setHisui(true);
-    setLoading(true);
-    await getPokemons('hisui');
+    await getPokemons(region);
     setLoading(false);
   }
 
@@ -129,12 +77,12 @@ export const PokemonList = () => {
     setLoading(false);
   }, [pokemons]);
 
-  useEffect(() => { handleKanto()}, [])
+  useEffect(() => { handleRegion('kanto')}, [])
   
   return (
     <Container>
       <FormContainer onSubmit={handleSubmit}>
-        <input list='pokemon-list' type='search' onChange={(e) => handleSearch(e.target.value)}/>
+        <input list='pokemon-list' type='search' onChange={handleSearch}/>
         <button type='submit'>
           <FaSearch className='searchIcon'/>
         </button>
@@ -149,15 +97,15 @@ export const PokemonList = () => {
       </FormContainer>
 
       <div className='regions'>
-        <Button onClick={handleKanto} isActive={kanto}>Kanto</Button>
-        <Button onClick={handleJohto} isActive={johto}>Johto</Button>
-        <Button onClick={handleHoenn} isActive={hoenn}>Hoenn</Button>
-        <Button onClick={handleSinnoh} isActive={sinnoh}>Sinnoh</Button>
-        <Button onClick={handleUnova} isActive={unova}>Unova</Button>
-        <Button onClick={handleKalos} isActive={kalos}>Kalos</Button>
-        <Button onClick={handleAlola} isActive={alola}>Alola</Button>
-        <Button onClick={handleGalar} isActive={galar}>Galar</Button>
-        <Button onClick={handleHisui} isActive={hisui} disabled={true}>Hisui</Button>
+        <Button onClick={() => handleRegion('kanto')} isActive={kanto}>Kanto</Button>
+        <Button onClick={() => handleRegion('johto')} isActive={johto}>Johto</Button>
+        <Button onClick={() => handleRegion('hoenn')} isActive={hoenn}>Hoenn</Button>
+        <Button onClick={() => handleRegion('sinnoh')} isActive={sinnoh}>Sinnoh</Button>
+        <Button onClick={() => handleRegion('unova')} isActive={unova}>Unova</Button>
+        <Button onClick={() => handleRegion('kalos')} isActive={kalos}>Kalos</Button>
+        <Button onClick={() => handleRegion('alola')} isActive={alola}>Alola</Button>
+        <Button onClick={() => handleRegion('galar')} isActive={galar}>Galar</Button>
+        <Button onClick={() => handleRegion('hisui')} isActive={hisui} disabled={true}>Hisui</Button>
       </div>
 
       {
