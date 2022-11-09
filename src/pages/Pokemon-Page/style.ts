@@ -72,9 +72,10 @@ export const Page = styled.div`
 
   .attributes {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     margin-top: 2rem;
-    gap: 1rem;
+    gap: 5rem;
+    /* justify-content: space-between; */
 
     background: var(--water);
     border-radius: 8px;
@@ -86,6 +87,12 @@ export const Page = styled.div`
       color: var(--white);
       font-size: 1.2rem;
     }
+  }
+
+  .attributes-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .attribute {

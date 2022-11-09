@@ -1,13 +1,14 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { PokeApi, Pokemon } from "../providers/api/pokeapi";
-import { getIdFromURL } from "../utils/get_id_from_url";
+import { EvolutionLine, PokeApi, Pokemon, Variation } from "../providers/api/pokeapi";
 
 interface PokemonsContextData {
   pokemons: Pokemon[];
   pokemon: Pokemon;
+  evolutionLine: EvolutionLine;
+  variations: Variation[]
   getPokemons: (region: string) => Promise<void>;
   search: (value: string) => Promise<void>;
-  getOnePokemon: (id: string) => Promise<Pokemon>;
+  getOnePokemon: (id: string) => Promise<void>;
 }
 
 interface PokemonsProps {
@@ -19,6 +20,9 @@ const PokemonsContext = createContext<PokemonsContextData>({} as PokemonsContext
 export const PokemonsProvider = ({children}: PokemonsProps) => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [pokemon, setPokemon] = useState<Pokemon>({} as Pokemon);
+  const [variations, setVariations] = useState<Variation[]>([]);
+  const [evolutionLine, setEvolutionLine] = useState<EvolutionLine>({} as EvolutionLine)
+
   const [kanto, setKanto] = useState<Pokemon[]>([]);
   const [johto, setJohto] = useState<Pokemon[]>([]);
   const [hoenn, setHoenn] = useState<Pokemon[]>([]);
@@ -27,6 +31,7 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
   const [kalos, setKalos] = useState<Pokemon[]>([]);
   const [alola, setAlola] = useState<Pokemon[]>([]);
   const [galar, setGalar] = useState<Pokemon[]>([]);
+  
   const pokeApi = PokeApi.getInstance();
 
   // *** ------------------------------------------------------------------------------------ *** //
@@ -62,19 +67,21 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
 
       setRegion[region as keyof typeof setRegion](pokemons);
 
-      
       return;
     }
 
     setPokemons(cache);
   }
 
-  const getOnePokemon = async (id: string): Promise<Pokemon> => {
-    const pokemon = await pokeApi.getOnePokemon(id) as Pokemon;
-    
-    setPokemon(pokemon);
+  const getOnePokemon = async (id: string) => {
+    const pokemonData = await pokeApi.getOnePokemon(id);
 
-    return pokemon;
+    const {pokemon, evolutionLine, variations} = pokemonData;
+
+    setPokemon(pokemon);
+    setVariations(variations);
+    setEvolutionLine(evolutionLine);
+    return
   }
 
   useEffect(() => {
@@ -99,7 +106,7 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
 
   return (
     <PokemonsContext.Provider 
-      value={{pokemon, pokemons, search, getPokemons, getOnePokemon}}>
+      value={{pokemon, variations, evolutionLine, pokemons, search, getPokemons, getOnePokemon}}>
         {children}
     </PokemonsContext.Provider>
   );

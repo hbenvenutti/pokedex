@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+export type EvYield = {
+  amount: number;
+  type: string;
+};
+
 export interface Pokemon {
   id: string;
   formId: string;
@@ -9,14 +14,59 @@ export interface Pokemon {
   dexNumber: number;
   types: string[];
   art: string;
-  height: number;
-  weight: number;
+  
+  height: string;
+  weight: string;
+  
   hp: number;
   attack: number;
   defense: number;
   specialAttack: number;
   specialDefense: number;
   speed: number;
+
+  evYield: EvYield[];
+}
+
+export interface Variation {
+  id: string;
+  dexNumber: number;
+  name: string;
+  types: string[];
+  art: string;
+
+  hp: number;
+  speed: number;
+  specialAttack: number;
+  attack: number;
+  specialDefense: number;
+  defense: number;
+
+  entry: string;
+
+  height: string;
+  weight: string;
+}
+
+interface Evolution {
+  pokemonId: string;
+  how: string;
+  art: string;
+}
+
+export interface EvolutionLine {
+  id: string;
+  species: string;
+  babyStage: Evolution[];
+  firstStage: Evolution[];
+  secondStage: Evolution[];
+  thirdStage: Evolution[];
+}
+
+export interface PokemonData {
+  pokemon: Pokemon;
+  variations: Variation[];
+  evolutionLine: EvolutionLine;
 }
 
 class PokeApi {
@@ -48,10 +98,10 @@ class PokeApi {
     return data as Pokemon[]; 
   }
 
-  getOnePokemon = async(id: string): Promise<Pokemon | undefined> => {
+  getOnePokemon = async(id: string): Promise<PokemonData> => {
     const {data} = await this.api.get(`/pokemons/${id}`);
-
-    return data as Pokemon
+    
+    return data as PokemonData;
   }
 }
 
