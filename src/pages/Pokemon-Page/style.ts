@@ -12,27 +12,24 @@ export const Page = styled.div`
     width: 90%;
   }
 
-  /* @media(max-width: 700px) {
-    width: 30rem;
-  }
-
-  @media(max-width: 540px) {
-    width: 20rem;
-  }
-
-  @media(max-width: 400px) {
-    width: 10rem;
-  } */
-
   .name {
     display: flex;
     flex-direction: row;
     gap: 2rem;
+    align-items: center;
+
+    @media(max-width: 970px) {
+      flex-direction: column;
+    }
 
     span {
       color: var(--gray-500);
       font-weight: 600;
       font-size: 2rem;
+
+      @media(max-width: 970px) {
+        /* font-size: 90%; */
+      }
     }
   }
 
@@ -81,16 +78,15 @@ export const Page = styled.div`
 
   .attributes {
     display: flex;
-    /* flex-direction: column; */
     margin-top: 2rem;
-    gap: 5rem;
-    /* justify-content: space-between; */
+    justify-content: space-between;
 
     background: var(--water);
     border-radius: 8px;
 
     width: 100%;
     padding: 1.5rem;
+    padding-right: 1.8rem;
 
     strong {
       color: var(--white);
@@ -117,7 +113,6 @@ export const Page = styled.div`
     gap: 0.5rem;
 
     width: 100%;
-    /* height: 30%; */
 
     strong {
       font-size: 1.5rem;
