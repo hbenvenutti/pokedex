@@ -2,8 +2,14 @@ import styled from "styled-components";
 
 export const PokemonEvolutionStageListContainer = styled.div`
     display: flex;
+    flex-direction: column;
+    gap: 2rem;
     align-items: center;
     color: var(--gray-800);
+
+    @media(max-width: 850px) {
+      flex-direction: row;
+    }
 
     .pokemon {
       display: flex;

@@ -27,7 +27,10 @@ export const EvolutionLine = () => {
           evolutionLine.secondStage.length > 0 &&
             <>
               <PokemonEvolutionStageList list={evolutionLine.secondStage}/>
-              <CaretRight weight="bold"/>
+              {
+                evolutionLine.thirdStage.length > 0
+                && <CaretRight weight="bold"/>
+              }
             </>
         }
         
