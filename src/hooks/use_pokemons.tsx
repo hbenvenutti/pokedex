@@ -31,6 +31,7 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
   const [kalos, setKalos] = useState<Pokemon[]>([]);
   const [alola, setAlola] = useState<Pokemon[]>([]);
   const [galar, setGalar] = useState<Pokemon[]>([]);
+  const [hisui, setHisui] = useState<Pokemon[]>([]);
   
   const pokeApi = PokeApi.getInstance();
 
@@ -44,7 +45,8 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
     unova,
     kalos,
     alola,
-    galar
+    galar,
+    hisui
   }
 
   const setRegion = {
@@ -55,7 +57,8 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
     unova: setUnova,
     kalos: setKalos,
     alola: setAlola,
-    galar: setGalar
+    galar: setGalar,
+    hisui: setHisui
   }
 
   const getPokemons = async (region: string): Promise<void> => {
