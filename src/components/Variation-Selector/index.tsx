@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 import { usePokemons } from "../../hooks/use_pokemons"
-import { Stats } from "../../pages/Pokemon-Page/PokemonPage";
+import { Stats } from "../../pages/Pokemon-Page";
 import { Pokemon, Variation } from "../../providers/api/pokeapi"
 import { SelectorContainer } from "./styles"
 
