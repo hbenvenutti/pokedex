@@ -3,7 +3,7 @@ import { FaSearch } from 'react-icons/fa';
 import ReactLoading from 'react-loading';
 
 import { usePokemons } from "../../hooks/use_pokemons";
-import { Button, Container, FormContainer, List } from './styles';
+import { Button, FormContainer, List, PokemonListPageContainer } from './styles';
 import { Pokemon } from '../../components/Pokemon/Pokemon';
 import { nameStartsWithValue } from '../../utils/nameStartsWithSearchValue';
 import { pokemonNameList } from '../../utils/pokemonNameList';
@@ -22,6 +22,8 @@ export const PokemonList = () => {
   const [alola, setAlola] = useState(false);
   const [galar, setGalar] = useState(false);
   const [hisui, setHisui] = useState(false);
+
+  // *** ---- Functions --------------------------------------------------------------------- *** //
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -69,8 +71,11 @@ export const PokemonList = () => {
     setLoading(false);
   }
 
+  // *** ---- Effects ----------------------------------------------------------------------- *** //
+
+
   useEffect(() => {
-    if (pokemons.length === 0 && !loading) {
+    if (pokemons.length === 0 && !searchValue && !loading) {
       setLoading(true)
       return
     }
@@ -79,8 +84,10 @@ export const PokemonList = () => {
 
   useEffect(() => { handleRegion('kanto')}, [])
   
+  // *** ---- TSX --------------------------------------------------------------------------- *** //
+
   return (
-    <Container>
+    <PokemonListPageContainer>
       <FormContainer onSubmit={handleSubmit}>
         <input 
           placeholder='busque por nome ou número'
@@ -141,6 +148,6 @@ export const PokemonList = () => {
               })}
             </List>
       } 
-    </Container>
+    </PokemonListPageContainer>
   )
 }

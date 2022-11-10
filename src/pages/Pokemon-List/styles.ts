@@ -25,7 +25,7 @@ export const Button = styled.button<CustomButtonProps>`
   }
 `
 
-export const Container = styled.div`
+export const PokemonListPageContainer = styled.main`
   display: flex;
   flex-direction: column;
   gap: 1rem;
