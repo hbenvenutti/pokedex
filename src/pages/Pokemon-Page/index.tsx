@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import ReactLoading from "react-loading";
 import {useParams} from 'react-router-dom';
+
 import { EvolutionLine } from "../../components/Evolution-Line";
 import { PokemonChart } from "../../components/Pokemon-Chart/PokemonChart";
 import { VariationSelector } from "../../components/Variation-Selector";
 
 import { usePokemons } from "../../hooks/use_pokemons";
 import { capitalize, capitalizeName } from "../../utils/capitalize";
-import { NotFound } from "../Not-Found/NotFound";
 import { Page } from "./style";
 
 export interface Stats {
@@ -70,10 +71,10 @@ export const PokemonPage = () => {
   }, [pokemon])
 
   return (
-    <>
+    <Page>
       {
         name
-          ? <Page>
+          ? <>
               <div className="name">
 
               <h1>{capitalizeName(name)}</h1>
@@ -162,10 +163,17 @@ export const PokemonPage = () => {
               {
                 evolutionLine && <EvolutionLine />
               }
-            </Page>
+            </>
           
-          : <NotFound />
+          : <ReactLoading 
+              className='loading' 
+              type='spinningBubbles' 
+              color='#4592c4' 
+              width={100} 
+              height={100}
+              delay={0}  
+            />
       }
-    </>
+    </Page>
   )
 }

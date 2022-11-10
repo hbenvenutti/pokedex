@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const Page = styled.div`
+export const Page = styled.main`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 1rem auto;
   align-items: center;
   width: 60rem;
   gap: 5rem;

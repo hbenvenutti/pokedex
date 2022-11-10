@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom"
 import { DefaultLayout } from "./layouts/default"
-import { NotFound } from "./pages/Not-Found/NotFound"
-import { PokemonList } from "./pages/Pokemon-List/PokemonList"
-import { PokemonPage } from "./pages/Pokemon-Page/PokemonPage"
+import { NotFound } from "./pages/Not-Found"
+import { PokemonList } from "./pages/Pokemon-List"
+import { PokemonPage } from "./pages/Pokemon-Page"
 
 export const Router = () => {
   return (
