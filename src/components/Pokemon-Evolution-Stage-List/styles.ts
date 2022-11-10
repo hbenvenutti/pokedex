@@ -8,12 +8,22 @@ export const PokemonEvolutionStageListContainer = styled.div`
     color: var(--gray-800);
 
     @media(max-width: 850px) {
-      flex-direction: row;
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      /* flex-direction: row; */
+      align-items: flex-start;
+    }
+    
+    @media(max-width: 850px) {
+      grid-template-columns: 1fr 1fr;
+      /* flex-direction: row; */
+      align-items: flex-start;
     }
 
     .pokemon {
       display: flex;
       align-items: center;
+      text-align: center;
 
       a {
         gap: 1rem;
