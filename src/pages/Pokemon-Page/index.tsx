@@ -3,12 +3,12 @@ import ReactLoading from "react-loading";
 import {useParams} from 'react-router-dom';
 
 import { EvolutionLine } from "../../components/Evolution-Line";
-import { PokemonChart } from "../../components/Pokemon-Chart/PokemonChart";
+import { PokemonChart } from "../../components/Pokemon-Chart";
 import { VariationSelector } from "../../components/Variation-Selector";
 
 import { usePokemons } from "../../hooks/use_pokemons";
 import { capitalize, capitalizeName } from "../../utils/capitalize";
-import { Page } from "./style";
+import { PokemonPageContainer } from "./style";
 
 export interface Stats {
   hp: number;
@@ -71,7 +71,7 @@ export const PokemonPage = () => {
   }, [pokemon])
 
   return (
-    <Page>
+    <PokemonPageContainer>
       {
         name
           ? <>
@@ -174,6 +174,6 @@ export const PokemonPage = () => {
               delay={0}  
             />
       }
-    </Page>
+    </PokemonPageContainer>
   )
 }

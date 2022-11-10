@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Pokeball } from '../Pokeball';
 
-import { Pokeball } from '../Pokeball/Pokeball';
 import { Container } from './styles';
 
 export const Header = () => {

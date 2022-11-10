@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Page = styled.main`
+export const PokemonPageContainer = styled.main`
   display: flex;
   flex-direction: column;
   margin: 1rem auto;

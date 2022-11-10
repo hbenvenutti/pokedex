@@ -3,8 +3,8 @@ import ReactLoading from 'react-loading';
 
 import { usePokemons } from "../../hooks/use_pokemons";
 import { Button, List, PokemonListPageContainer } from './styles';
-import { Pokemon } from '../../components/Pokemon/Pokemon';
 import { SearchForm } from '../../components/Search-Form';
+import { Pokemon } from '../../components/Pokemon';
 
 export const PokemonList = () => {
   const { pokemons, getPokemons } = usePokemons()
