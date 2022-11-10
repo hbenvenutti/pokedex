@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {useParams} from 'react-router-dom';
+import { EvolutionLine } from "../../components/Evolution-Line";
 import { PokemonChart } from "../../components/Pokemon-Chart/PokemonChart";
 import { VariationSelector } from "../../components/Variation-Selector";
 
@@ -156,6 +157,8 @@ export const PokemonPage = () => {
                 specialDefense={stats.specialDefense}
                 speed={stats.speed}
               />
+
+              <EvolutionLine />
             </Page>
           
           : <NotFound />
