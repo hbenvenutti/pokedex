@@ -159,7 +159,9 @@ export const PokemonPage = () => {
                 speed={stats.speed}
               />
 
-              <EvolutionLine />
+              {
+                evolutionLine && <EvolutionLine />
+              }
             </Page>
           
           : <NotFound />
