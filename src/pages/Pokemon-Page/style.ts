@@ -86,11 +86,15 @@ export const Page = styled.div`
 
     width: 100%;
     padding: 1.5rem;
-    padding-right: 1.8rem;
+    padding-right: 20%;
 
     strong {
       color: var(--white);
       font-size: 1.2rem;
+    }
+
+    @media(max-width: 450px) {
+      padding-right: 10%;
     }
   }
 

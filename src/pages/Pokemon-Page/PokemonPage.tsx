@@ -36,6 +36,7 @@ export const PokemonPage = () => {
   useEffect(() => {
     if (id) {
       getOnePokemon(id);
+      window.scrollTo(0, 0)
     }
   }, [id]);
 
