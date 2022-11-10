@@ -6,9 +6,10 @@ import { PokemonEvolutionStageListContainer } from "./styles";
 
 interface PokemonEvolutionStageListProps {
   list: Evolution[];
+  last?: boolean;
 }
 
-export const PokemonEvolutionStageList = ({list}: PokemonEvolutionStageListProps) => {
+export const PokemonEvolutionStageList = ({list, last=false}: PokemonEvolutionStageListProps) => {
   return (
     <PokemonEvolutionStageListContainer className="stage">
     {
@@ -18,7 +19,6 @@ export const PokemonEvolutionStageList = ({list}: PokemonEvolutionStageListProps
             <img src={pokemon.art} alt="" />
             <span>{pokemon.how}</span>
           </Link>
-          <CaretRight weight="bold"/>
         </div>
       )
     }

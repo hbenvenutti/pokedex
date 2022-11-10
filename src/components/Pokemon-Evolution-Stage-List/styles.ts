@@ -3,30 +3,49 @@ import styled from "styled-components";
 export const PokemonEvolutionStageListContainer = styled.div`
     display: flex;
     align-items: center;
-    /* font-size: 5rem; */
+    color: var(--gray-800);
 
     .pokemon {
       display: flex;
       align-items: center;
 
-
       a {
+        gap: 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
-      }
 
-      img {
-        background-color: var(--ice);
+        &:focus {
+          box-shadow: none;
+          img {
+            border-color: var(--gray-500);
+          }
+        }
 
-        border: 5px solid var(--gray-800);
-        border-radius: 50%;
-        
-        width: 10rem;
-        height: 10rem;
+        img {
+          background-color: var(--gray-100);
+  
+          border: 5px solid var(--gray-800);
+          border-radius: 50%;
+          
+          width: 10rem;
+          height: 10rem;
+  
+          transition: background-color 0.15s;
+  
+          &:hover {
+            background-color: var(--flying-1);
+          }
+  
+          @media(max-width: 850px) {
+            flex: 1;
+            height: auto;
+          }
+        }
       }
 
       svg {
+        margin-top: -1rem;
         font-size: 5rem;
       }
     }
