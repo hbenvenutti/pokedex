@@ -49,7 +49,7 @@ export interface Variation {
   weight: string;
 }
 
-interface Evolution {
+export interface Evolution {
   pokemonId: string;
   how: string;
   art: string;

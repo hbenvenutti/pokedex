@@ -37,7 +37,7 @@ export const PokemonPage = () => {
     if (id) {
       getOnePokemon(id);
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (pokemon) {
