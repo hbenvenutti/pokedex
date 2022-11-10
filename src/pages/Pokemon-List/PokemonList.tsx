@@ -111,7 +111,7 @@ export const PokemonList = () => {
         <Button onClick={() => handleRegion('kalos')} isActive={kalos}>Kalos</Button>
         <Button onClick={() => handleRegion('alola')} isActive={alola}>Alola</Button>
         <Button onClick={() => handleRegion('galar')} isActive={galar}>Galar</Button>
-        <Button onClick={() => handleRegion('hisui')} isActive={hisui} disabled={true}>Hisui</Button>
+        <Button onClick={() => handleRegion('hisui')} isActive={hisui}>Hisui</Button>
       </div>
 
       {
