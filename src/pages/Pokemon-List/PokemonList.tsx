@@ -1,16 +1,13 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
+import React, {useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
 
 import { usePokemons } from "../../hooks/use_pokemons";
-import { Button, FormContainer, List, PokemonListPageContainer } from './styles';
+import { Button, List, PokemonListPageContainer } from './styles';
 import { Pokemon } from '../../components/Pokemon/Pokemon';
-import { nameStartsWithValue } from '../../utils/nameStartsWithSearchValue';
-import { pokemonNameList } from '../../utils/pokemonNameList';
+import { SearchForm } from '../../components/Search-Form';
 
 export const PokemonList = () => {
-  const { pokemons, search, getPokemons } = usePokemons()
-  const [searchValue, setSearchValue] = useState('')
+  const { pokemons, getPokemons } = usePokemons()
   const [loading, setLoading] = useState(false);
 
   const [kanto, setKanto] = useState(true);
@@ -25,16 +22,6 @@ export const PokemonList = () => {
 
   // *** ---- Functions --------------------------------------------------------------------- *** //
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    
-    setLoading(true);
-    search(searchValue);
-    deactivateButtons();
-    setLoading(false);
-    return
-  }
-
   const deactivateButtons = () => {
     setKanto(false);
     setJohto(false);
@@ -45,10 +32,6 @@ export const PokemonList = () => {
     setAlola(false);
     setGalar(false);
     setHisui(false);
-  }
-
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
   }
 
   const setRegion = {
@@ -75,7 +58,7 @@ export const PokemonList = () => {
 
 
   useEffect(() => {
-    if (pokemons.length === 0 && !searchValue && !loading) {
+    if (pokemons.length === 0 && !loading) {
       setLoading(true)
       return
     }
@@ -88,26 +71,7 @@ export const PokemonList = () => {
 
   return (
     <PokemonListPageContainer>
-      <FormContainer onSubmit={handleSubmit}>
-        <input 
-          placeholder='busque por nome ou número'
-          list='pokemon-list' 
-          type='search' 
-          onChange={handleSearch}
-        />
-
-        <button type='submit'>
-          <FaSearch className='searchIcon'/>
-        </button>
-
-        <datalist id='pokemon-list'>
-          {
-            searchValue && pokemonNameList.map(pokemon => 
-                nameStartsWithValue(searchValue, pokemon) 
-                && <option key={pokemon} value={pokemon}/>)
-          }
-        </datalist>
-      </FormContainer>
+      <SearchForm deactivateButtons={deactivateButtons} setLoading={setLoading}/>
 
       <div className='regions'>
         <Button onClick={() => handleRegion('kanto')} isActive={kanto}>Kanto</Button>

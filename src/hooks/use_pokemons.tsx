@@ -97,6 +97,10 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
     if (value) {
       const pokemon = await pokeApi.searchPokemon(value);
       
+      if (pokemon.length === 0) {
+        return
+      }
+
       setPokemons(pokemon);
 
       return
