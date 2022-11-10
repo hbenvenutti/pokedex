@@ -6,22 +6,27 @@ export const PokemonEvolutionStageListContainer = styled.div`
     gap: 2rem;
     align-items: center;
     color: var(--gray-800);
-
-    @media(max-width: 850px) {
-      display: inline-grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      /* flex-direction: row; */
-      align-items: flex-start;
-    }
     
     @media(max-width: 850px) {
-      grid-template-columns: 1fr 1fr;
-      /* flex-direction: row; */
+      display: grid;
+      grid-template-columns: auto auto auto;
+      grid-auto-flow: row;
       align-items: flex-start;
+      column-gap: 0.1rem;
+      row-gap: 2rem;
     }
-
+    
+    @media(max-width: 550px) {
+      display: grid;
+      grid-template-columns: auto auto;
+      /* align-items: flex-start; */
+      align-items: flex-start;
+      justify-content: center;
+    }
+    
     .pokemon {
       display: flex;
+      flex: 1;
       align-items: center;
       text-align: center;
 
@@ -38,26 +43,34 @@ export const PokemonEvolutionStageListContainer = styled.div`
           }
         }
 
-        img {
+        .image {
           background-color: var(--gray-100);
-  
+          box-shadow: 10px #000;
           border: 5px solid var(--gray-800);
           border-radius: 50%;
-          
+
+          overflow: hidden;
           width: 10rem;
           height: 10rem;
-  
+
           transition: background-color 0.15s;
-  
+
           &:hover {
             background-color: var(--flying-1);
           }
-  
+
           @media(max-width: 850px) {
             flex: 1;
             height: auto;
           }
+
+          img {
+            background-color: transparent;
+            width: 9rem;
+            height: 9rem;
+          }
         }
+
       }
 
       svg {

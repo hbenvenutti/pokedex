@@ -16,7 +16,7 @@ export const PokemonEvolutionStageList = ({list, last=false}: PokemonEvolutionSt
       list.map(pokemon => 
         <div className='pokemon' key={pokemon.pokemonId}>
           <Link key={pokemon.pokemonId} to={`/pokemons/${pokemon.pokemonId}`}>
-            <img src={pokemon.art} alt="" />
+            <div className="image"><img src={pokemon.art} alt="" /></div>
             <span>{pokemon.how}</span>
           </Link>
         </div>
