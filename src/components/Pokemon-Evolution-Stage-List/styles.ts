@@ -45,7 +45,8 @@ export const PokemonEvolutionStageListContainer = styled.div`
 
         .image {
           background-color: var(--gray-100);
-          box-shadow: 10px #000;
+          box-shadow: 0px 8px 8px 0 rgba(0,0,0,0.2);
+
           border: 5px solid var(--gray-800);
           border-radius: 50%;
 
