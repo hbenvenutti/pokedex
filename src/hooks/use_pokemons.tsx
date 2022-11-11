@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { EvolutionLine, PokeApi, Pokemon, Variation } from "../providers/api/pokeapi";
+import { EvolutionLine, PokeApi, Pokemon, PokemonData, Variation } from "../providers/api/pokeapi";
 
 interface PokemonsContextData {
   pokemons: Pokemon[];
@@ -76,14 +76,41 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
     setPokemons(cache);
   }
 
-  const getOnePokemon = async (id: string) => {
-    const pokemonData = await pokeApi.getOnePokemon(id);
-
+  const setPokemonData = (pokemonData: PokemonData) => {
     const {pokemon, evolutionLine, variations} = pokemonData;
-
+      
     setPokemon(pokemon);
     setVariations(variations);
     setEvolutionLine(evolutionLine);
+  }
+
+  const checkIfPokemonDataIsCached = (id: string): boolean => {
+    const cache = localStorage.getItem('pokemonData');
+    
+    if (cache && (JSON.parse(cache) as PokemonData).pokemon.formId === id) {
+      setPokemonData(JSON.parse(cache));
+
+      return true;
+    }
+
+    return false;
+  }
+
+  const cachePokemonData = (pokemonData: PokemonData): void => {
+    localStorage.setItem('pokemonData', JSON.stringify(pokemonData));
+  }
+
+  const getOnePokemon = async (id: string): Promise<void> => {
+    const isPokemonDataCached = checkIfPokemonDataIsCached(id);
+
+    if (isPokemonDataCached) return;
+
+    const pokemonData = await pokeApi.getOnePokemon(id);
+
+    setPokemonData(pokemonData);
+
+    cachePokemonData(pokemonData);
+
     return
   }
 
