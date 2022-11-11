@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import ReactLoading from "react-loading";
+
+export  const LoadingSVG = styled(ReactLoading)`
+  margin-top: 15.625rem;
+`
 
 export const PokemonPageContainer = styled.main`
   display: flex;

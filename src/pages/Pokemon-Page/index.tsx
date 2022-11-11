@@ -7,8 +7,9 @@ import { PokemonChart } from "../../components/Pokemon-Chart";
 import { VariationSelector } from "../../components/Variation-Selector";
 
 import { usePokemons } from "../../hooks/use_pokemons";
+import { Pokemon } from "../../providers/api/pokeapi";
 import { capitalize, capitalizeName } from "../../utils/capitalize";
-import { PokemonPageContainer } from "./style";
+import { LoadingSVG, PokemonPageContainer } from "./style";
 
 export interface Stats {
   hp: number;
@@ -20,6 +21,8 @@ export interface Stats {
 }
 
 export const PokemonPage = () => {
+  const [loading, setLoading] = useState(false);
+
   const { id } = useParams()
   const { getOnePokemon, pokemon, variations, evolutionLine } = usePokemons();
   
@@ -34,7 +37,26 @@ export const PokemonPage = () => {
 
   const [stats, setStats] = useState<Stats>({} as Stats);
 
+  // *** ---- Functions --------------------------------------------------------------------- *** //
+
+  const setPokemonData = (pokemon: Pokemon) => {
+    const { hp, attack, specialAttack, defense, specialDefense, speed } = pokemon;
+
+    setName(pokemon.name);
+    setArt(pokemon.art);
+    setEntry(pokemon.entry);
+    setTypes(pokemon.types)
+    setStats({hp, attack, specialAttack, defense, specialDefense, speed})
+    setHeight(pokemon.height)
+    setWeight(pokemon.weight)
+    setAbilities(pokemon.abilities)
+  }
+
+  // *** ---- Effects ----------------------------------------------------------------------- *** //
+
   useEffect(() => {
+    setLoading(true);
+    
     if (id) {
       getOnePokemon(id);
       window.scrollTo(0, 0)
@@ -42,38 +64,20 @@ export const PokemonPage = () => {
   }, [id]);
 
   useEffect(() => {
-    if (pokemon) {
-      const {
-        name, 
-        art, 
-        entry, 
-        types, 
-        hp, 
-        attack, 
-        specialAttack, 
-        defense, 
-        specialDefense, 
-        speed,
-        height,
-        weight,
-        abilities
-      } = pokemon;
 
-      setName(name);
-      setArt(art);
-      setEntry(entry);
-      setTypes(types)
-      setStats({hp, attack, specialAttack, defense, specialDefense, speed})
-      setHeight(height)
-      setWeight(weight)
-      setAbilities(abilities)
+    if (pokemon) {
+      setPokemonData(pokemon);
+      setLoading(false);
     }
+
   }, [pokemon])
+
+  // *** ---- TSX --------------------------------------------------------------------------- *** //
 
   return (
     <PokemonPageContainer>
       {
-        name
+        !loading && name
           ? <>
               <div className="name">
 
@@ -165,7 +169,7 @@ export const PokemonPage = () => {
               }
             </>
           
-          : <ReactLoading 
+          : <LoadingSVG 
               className='loading' 
               type='spinningBubbles' 
               color='#4592c4' 
