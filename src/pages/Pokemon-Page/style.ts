@@ -45,6 +45,7 @@ export const PokemonPageContainer = styled.main`
 
     @media (max-width: 970px) {
       width: 100%;
+      max-width: 30rem;
       height: auto;
     }
   }
