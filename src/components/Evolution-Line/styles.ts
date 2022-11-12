@@ -9,9 +9,10 @@ export const EvolutionLineContainer = styled.div`
   .evolutions {
     display: flex;  
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 2rem;
     
-    padding: 4rem;
+    padding: 2rem;
     
     /* background-color: var(--gray-800); */
     border-radius: 8px;

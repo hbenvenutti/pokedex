@@ -21,25 +21,21 @@ export const EvolutionLine = () => {
         }
         
         <PokemonEvolutionStageList list={evolutionLine.firstStage}/>
-        {
-          evolutionLine.secondStage.length > 0 &&
-          <CaretRight weight="bold"/>
-        }
 
         {
           evolutionLine.secondStage.length > 0 &&
             <>
+              <CaretRight weight="bold"/>
               <PokemonEvolutionStageList list={evolutionLine.secondStage}/>
-              {
-                evolutionLine.thirdStage.length > 0
-                && <CaretRight weight="bold"/>
-              }
             </>
         }
         
         {
-          evolutionLine.thirdStage.length > 0
-            && <PokemonEvolutionStageList last list={evolutionLine.thirdStage}/>
+          evolutionLine.thirdStage.length > 0 && 
+            <>
+              <CaretRight weight="bold"/>
+              <PokemonEvolutionStageList last list={evolutionLine.thirdStage}/>
+            </>
         }
       </div>
 

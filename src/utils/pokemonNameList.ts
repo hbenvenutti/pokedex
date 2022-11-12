@@ -23,7 +23,21 @@ const kanto: string[] = [
   'dratini', 'dragonair', 'dragonite', 'mewtwo', 'mew'
 ];
 
-const johto: string[] = []
+const johto: string[] = [
+  "chicorita", "bayleef", "meganium", "cyndaquil", "quilava", "typhlosion", "totodile", "croconaw", "feraligatr",
+  "sentret", "furret", "hoothoot", "noctowl", "ledyba", "ledian", "spinarak", "ariados",
+  "crobat", "chinchou", "lanturn", "pichu", "cleffa", "igglybuff", "togepi", "togetic", "natu", "xatu", 
+  "mareep", "flaafy", "ampharos", "bellossom", "marill", "azumarill", "sudowoodo", "politoed", 
+  "hoppip", "skiploom", "jumpluff", "aipom", "sunkern", "sunflora", "yanma", "wooper", "quagsire",
+  "espeon", "umbreon", "murkrow", "slowking", "misdreavus", "unown", "wobbuffet", "girafarig",
+  "pineco", "forretress", "dunsparce", "gligar", "steelix", "snubbull", "granbull","qwilfish", "scizor", "shuckle",
+  "heracross", "sneasel", "teddiursa", "ursaring", "slugma", "magcargo", "swinub", "piloswine", "corsola",
+  "remoraid", "octillery", "delibird", "mantine", "skarmory", "houndour", "houndoom",
+  "kingdra", "phanpy", "donphan", "porygon2", "stantler", "smeargle", "tyrogue", "hitmontop", "smoochum",
+  "elekid", "magby", "miltank", "blissey", "raikou", "entei", "suicune",  "larvitar", "pupitar", "tyranitar",
+  "lugia", "ho-oh", "celebi"
+]
+
 const hoenn: string[] = []
 const sinnoh: string[] = []
 const unova: string[] = []
