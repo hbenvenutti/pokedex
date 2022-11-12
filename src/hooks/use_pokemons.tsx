@@ -85,7 +85,7 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
   }
 
   const checkIfPokemonDataIsCached = (id: string): boolean => {
-    const cache = localStorage.getItem('pokemonData');
+    const cache = sessionStorage.getItem('pokemonData');
     
     if (cache && (JSON.parse(cache) as PokemonData).pokemon.formId === id) {
       setPokemonData(JSON.parse(cache));
@@ -97,7 +97,7 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
   }
 
   const cachePokemonData = (pokemonData: PokemonData): void => {
-    localStorage.setItem('pokemonData', JSON.stringify(pokemonData));
+    sessionStorage.setItem('pokemonData', JSON.stringify(pokemonData));
   }
 
   const getOnePokemon = async (id: string): Promise<void> => {
