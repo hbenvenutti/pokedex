@@ -17,10 +17,10 @@ export const checkIfRegionIsCached = (region: string): Pokemon[] | undefined => 
 }
 
 
-export const checkIfPokemonDataIsCached = (id: string): PokemonData => {
+export const checkIfPokemonDataIsCached = (id: string): PokemonData | undefined => {
   const cache = sessionStorage.getItem(id);
 
-  if (!cache) return {} as PokemonData;
+  if (!cache) return undefined;
   
   return JSON.parse(cache)
 }
