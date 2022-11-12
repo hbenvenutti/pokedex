@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { EvolutionLine, PokeApi, Pokemon, PokemonData, Variation } from "../providers/api/pokeapi";
+import { cachePokemonData, cacheRegion, checkIfPokemonDataIsCached, checkIfRegionIsCached } from "../providers/cache/sessionCache";
 
 interface PokemonsContextData {
   pokemons: Pokemon[];
@@ -62,18 +63,22 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
   }
 
   const getPokemons = async (region: string): Promise<void> => {
-    const cache = regionCache[region as keyof typeof regionCache];
+    const memoryCache = regionCache[region as keyof typeof regionCache];
+
+    if (memoryCache.length > 0) return setPokemons(memoryCache);
+
+    const cachedList = checkIfRegionIsCached(region);
     
-    if (cache.length === 0) {
-      const pokemons = await pokeApi.listByRegion(region);
-      setPokemons(pokemons);
+    if (cachedList) return setPokemons(cachedList);
 
-      setRegion[region as keyof typeof setRegion](pokemons);
+    const pokemons = await pokeApi.listByRegion(region);
+    setPokemons(pokemons);
 
-      return;
-    }
+    cacheRegion(region, pokemons);
 
-    setPokemons(cache);
+    setRegion[region as keyof typeof setRegion](pokemons);
+
+    return;
   }
 
   const setPokemonData = (pokemonData: PokemonData) => {
@@ -84,32 +89,17 @@ export const PokemonsProvider = ({children}: PokemonsProps) => {
     setEvolutionLine(evolutionLine);
   }
 
-  const checkIfPokemonDataIsCached = (id: string): boolean => {
-    const cache = sessionStorage.getItem('pokemonData');
-    
-    if (cache && (JSON.parse(cache) as PokemonData).pokemon.formId === id) {
-      setPokemonData(JSON.parse(cache));
-
-      return true;
-    }
-
-    return false;
-  }
-
-  const cachePokemonData = (pokemonData: PokemonData): void => {
-    sessionStorage.setItem('pokemonData', JSON.stringify(pokemonData));
-  }
 
   const getOnePokemon = async (id: string): Promise<void> => {
-    const isPokemonDataCached = checkIfPokemonDataIsCached(id);
+    const cachedData = checkIfPokemonDataIsCached(id);
 
-    if (isPokemonDataCached) return;
+    if (cachedData) return setPokemonData(cachedData);
 
     const pokemonData = await pokeApi.getOnePokemon(id);
 
     setPokemonData(pokemonData);
 
-    cachePokemonData(pokemonData);
+    cachePokemonData(id, pokemonData);
 
     return
   }
